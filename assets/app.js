@@ -122,8 +122,19 @@ function applySearch(list){
     +'<div><h2>'+p.name+'</h2><div class="price">'+fmt(p.price)+(p.oldPrice?'<span class="old">'+fmt(p.oldPrice)+'</span>':"")+'</div>'
     +'<div class="'+(p.stock?"in":"out")+'">'+(p.stock?"● Còn hàng":"○ Hết hàng")+'</div>'
     +'<p class="card-spec">'+p.spec+'</p>'
-    +'<div><button class="btn" '+(p.stock?"":'disabled')+'>'+(p.stock?"Liên hệ đặt hàng":"Hết hàng")+'</button> <a class="btn secondary" href="../danh-muc/'+p.category+'.html">Quay lại danh mục</a></div>'
+    +'<div><button class="btn" id="order-btn" '+(p.stock?"":'disabled')+'>'+(p.stock?"Liên hệ đặt hàng":"Hết hàng")+'</button> <a class="btn secondary" href="../danh-muc/'+p.category+'.html">Quay lại danh mục</a></div>'
+    +'<p id="order-note" class="order-note" style="display:none"></p>'
     +'<table class="spec-table"><caption>Thông số kỹ thuật</caption>'+specRows.map(function(x){return "<tr><td colspan=\"2\">"+x+"</td></tr>";}).join("")+rows+'</table></div></div>';
+  /* TEC-101: nút "Liên hệ đặt hàng" trước đây là button thuần, không có handler nên bấm không có tác dụng.
+     Hành vi mới: hiện ghi chú ngay tại chỗ + cuộn tới khối liên hệ ở footer và làm nổi bật nó.
+     TUYỆT ĐỐI không bịa số điện thoại/email: footer hiện vẫn ghi "(chưa cập nhật)". */
+  var orderBtn=document.getElementById("order-btn");
+  if(orderBtn) orderBtn.addEventListener("click",function(){
+    var note=document.getElementById("order-note");
+    if(note){note.textContent="Thông tin liên hệ hiện vẫn (chưa cập nhật) — xem khối liên hệ cuối trang.";note.style.display="block";}
+    var f=document.querySelector("footer");
+    if(f){f.scrollIntoView({behavior:"smooth"});f.classList.add("contact-flash");setTimeout(function(){f.classList.remove("contact-flash");},3000);}
+  });
   var rel=window.PRODUCTS.filter(function(x){return x.category===p.category&&x.id!==p.id;}).slice(0,4);
   if(rel.length){document.getElementById("related-wrap").style.display="block";document.getElementById("related-grid").innerHTML=rel.map(cardHTML).join("");}
 })();
