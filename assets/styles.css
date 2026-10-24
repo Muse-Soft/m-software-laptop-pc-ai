@@ -51,3 +51,7 @@ footer{margin-top:32px;border-top:1px solid var(--color-border);background:var(-
 .spec-table caption{text-align:left;font-weight:700;padding:8px 0}
 .spec-table th,.spec-table td{border:1px solid var(--color-border);padding:8px 12px;text-align:left}
 .spec-table th{background:var(--color-bg);width:40%}
+
+/* TEC-101: ghi chú + làm nổi bật khối liên hệ khi bấm "Liên hệ đặt hàng" */
+.order-note{margin-top:10px;color:var(--color-text-muted)}
+.contact-flash{outline:3px solid var(--color-primary);outline-offset:4px}
