@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Phụ kiện — Shop Laptop &amp; PC AI</title><link rel="stylesheet" href="../assets/styles.css"></head>
+<body>
+<header class="site"><div class="container"><div class="header-row">
+<a class="logo" href="../index.html">Laptop &amp; PC AI</a>
+<div class="search"><input id="search-input" type="search" placeholder="Tìm sản phẩm…"></div>
+<button id="menu-btn" type="button">☰ Menu</button>
+<nav class="main"><a href="laptop-ai.html">Laptop AI</a><a href="pc.html">PC</a><a href="workstation.html">Workstation</a><a href="phu-kien.html">Phụ kiện</a></nav>
+</div></div></header>
+<main class="container">
+<h2>Phụ kiện (4 sản phẩm)</h2>
+<button id="filter-btn" class="btn" type="button">Lọc</button>
+<div class="catalog-layout">
+<aside class="filters">
+<h3>Danh mục</h3>
+<label><input type="checkbox" class="f-cat" value="laptop-ai" > Laptop AI</label>
+<label><input type="checkbox" class="f-cat" value="pc" > PC</label>
+<label><input type="checkbox" class="f-cat" value="workstation" > Workstation</label>
+<label><input type="checkbox" class="f-cat" value="phu-kien" checked> Phụ kiện</label>
+<h3>Thương hiệu</h3><div id="brand-filters"></div>
+<h3>Khoảng giá</h3>
+<label><input type="checkbox" class="f-price" value="lt15"> Dưới 15 triệu</label>
+<label><input type="checkbox" class="f-price" value="15-30"> 15–30 triệu</label>
+<label><input type="checkbox" class="f-price" value="30-50"> 30–50 triệu</label>
+<label><input type="checkbox" class="f-price" value="gt50"> Trên 50 triệu</label>
+<h3>RAM</h3>
+<label><input type="checkbox" class="f-ram" value="16"> 16GB</label>
+<label><input type="checkbox" class="f-ram" value="32"> 32GB</label>
+<label><input type="checkbox" class="f-ram" value="64"> 64GB trở lên</label>
+<h3>NPU / AI</h3><label><input type="checkbox" id="f-npu"> Có NPU (chạy AI trên máy)</label>
+<h3>Tình trạng</h3><label><input type="checkbox" id="f-instock"> Còn hàng (ẩn sản phẩm hết hàng)</label>
+<p><button id="clear-filters" class="btn secondary" type="button">Xóa tất cả lọc</button></p>
+</aside>
+<section>
+<div class="toolbar"><span id="shown-count"></span>
+<label>Sắp xếp: <select id="sort"><option value="newest">Mới nhất</option><option value="price-asc">Giá tăng dần</option><option value="price-desc">Giá giảm dần</option><option value="name">Tên A–Z</option></select></label></div>
+<div id="catalog-grid" class="grid catalog" data-category="phu-kien"><div class="skeleton"></div></div>
+<div id="empty-state" class="empty" style="display:none"><p>Không có sản phẩm phù hợp — thử bỏ bớt bộ lọc</p><button id="empty-clear" class="btn" type="button">Xóa tất cả lọc</button></div>
+<div class="loadmore"><button id="load-more" class="btn" type="button">Xem thêm</button></div>
+<div id="all-done" class="all-done" style="display:none">Đã hiển thị tất cả sản phẩm</div>
+</section>
+</div>
+</main>
+<footer><div class="container"><p><strong>Shop Laptop &amp; PC AI</strong> — Liên hệ: email: (chưa cập nhật) · Điện thoại: (chưa cập nhật)</p>
+<p>© Shop Laptop &amp; PC AI</p></div></footer>
+<script src="../assets/data.js"></script><script src="../assets/app.js"></script>
+</body></html>
