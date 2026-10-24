@@ -1,5 +1,7 @@
 /* TEC-31: render thẻ sản phẩm dùng chung + lọc/sắp xếp/phân trang trang danh mục. */
 function fmt(n){return n.toLocaleString("vi-VN")+" ₫";}
+function detailPrefix(){var ph=window.location.pathname;return (ph.indexOf("/danh-muc/")>=0||ph.indexOf("/san-pham/")>=0)?"../":"";}
+function catName(slug){var c=(window.CATEGORIES||[]).filter(function(x){return x.slug===slug;})[0];return c?c.name:slug;}
 function cardHTML(p){
   var badges="";
   if(p.npu) badges+='<span class="badge ai">AI</span>';
@@ -8,14 +10,14 @@ function cardHTML(p){
   +'<div class="card-body"><div class="card-name">'+p.name+'</div><div class="card-spec">'+p.spec+'</div>'
   +'<div class="price">'+fmt(p.price)+(p.oldPrice?'<span class="old">'+fmt(p.oldPrice)+'</span>':"")+'</div>'
   +'<div class="'+(p.stock?"in":"out")+'">'+(p.stock?"● Còn hàng":"○ Hết hàng")+'</div>'
-  +'<div><button class="btn secondary" onclick="alert(\'Chi tiết sản phẩm: '+p.name+' (MVP: chưa có trang chi tiết)\')">Xem chi tiết</button> '
+  +'<div><a class="btn secondary" href="'+detailPrefix()+'san-pham/chi-tiet.html?id='+p.id+'">Xem chi tiết</a> '
   +(p.stock?"":'<button class="btn secondary" disabled>Hết hàng</button>')+'</div></div></article>';
 }
 function applySearch(list){
   var q=(document.getElementById("search-input")||{}).value||"";
   q=q.trim().toLowerCase();
   if(!q) return list;
-  return list.filter(function(p){return p.name.toLowerCase().indexOf(q)>=0;});
+  return list.filter(function(p){return (p.name+" "+p.brand+" "+p.spec+" "+catName(p.category)).toLowerCase().indexOf(q)>=0;});
 }
 /* Trang chủ */
 (function(){
@@ -35,6 +37,8 @@ function applySearch(list){
 (function(){
   var grid=document.getElementById("catalog-grid"); if(!grid) return;
   var slug=grid.dataset.category, PAGE=6, shown=PAGE;
+  var qParam=new URLSearchParams(window.location.search).get("q");
+  if(qParam){document.getElementById("search-input").value=qParam;document.querySelectorAll(".f-cat").forEach(function(x){x.checked=true;});}
   var brands=[]; window.PRODUCTS.forEach(function(p){if(brands.indexOf(p.brand)<0) brands.push(p.brand);});
   document.getElementById("brand-filters").innerHTML=brands.map(function(b){
     return '<label><input type="checkbox" class="f-brand" value="'+b+'"> '+b+'</label>';}).join("");
@@ -98,5 +102,29 @@ function applySearch(list){
   document.getElementById("empty-clear").addEventListener("click",function(){document.getElementById("clear-filters").click();});
   document.getElementById("filter-btn").addEventListener("click",function(){document.querySelector(".filters").classList.toggle("open");});
   render(true);
+})();
+
+/* Trang chi tiet san pham (TEC-32) */
+(function(){
+  var box=document.getElementById("detail"); if(!box) return;
+  var id=parseInt(new URLSearchParams(window.location.search).get("id"),10);
+  var p=(window.PRODUCTS||[]).filter(function(x){return x.id===id;})[0];
+  var search=document.getElementById("search-input");
+  if(search) search.addEventListener("keydown",function(e){if(e.key==="Enter"&&search.value.trim()) window.location.href="../danh-muc/laptop-ai.html?q="+encodeURIComponent(search.value.trim());});
+  if(!p){box.style.display="none";document.getElementById("not-found").style.display="block";document.title="Không tìm thấy sản phẩm — Shop Laptop & PC AI";return;}
+  document.title=p.name+" — Shop Laptop & PC AI";
+  var crumb=document.getElementById("crumb-cat");
+  if(crumb) crumb.innerHTML='› <a href="../danh-muc/'+p.category+'.html">'+catName(p.category)+'</a> › '+p.name;
+  var badges=""; if(p.npu) badges+='<span class="badge ai">AI</span>'; if(p.isNew) badges+='<span class="badge new">Mới</span>';
+  var specRows=p.spec.split("·").map(function(x){return x.trim();}).filter(Boolean);
+  var rows=[["Thương hiệu",p.brand],["Danh mục",catName(p.category)],["RAM",p.ram?p.ram+"GB":"—"],["NPU / AI trên máy",p.npu?"Có":"Không"],["Bảo hành","24 tháng"]].map(function(r){return "<tr><th>"+r[0]+"</th><td>"+r[1]+"</td></tr>";}).join("");
+  box.innerHTML='<div class="detail-layout"><div class="detail-img"><div class="badges">'+badges+'</div><span>'+(window.CATEGORY_ICON[p.category]||"📦")+'</span></div>'
+    +'<div><h2>'+p.name+'</h2><div class="price">'+fmt(p.price)+(p.oldPrice?'<span class="old">'+fmt(p.oldPrice)+'</span>':"")+'</div>'
+    +'<div class="'+(p.stock?"in":"out")+'">'+(p.stock?"● Còn hàng":"○ Hết hàng")+'</div>'
+    +'<p class="card-spec">'+p.spec+'</p>'
+    +'<div><button class="btn" '+(p.stock?"":'disabled')+'>'+(p.stock?"Liên hệ đặt hàng":"Hết hàng")+'</button> <a class="btn secondary" href="../danh-muc/'+p.category+'.html">Quay lại danh mục</a></div>'
+    +'<table class="spec-table"><caption>Thông số kỹ thuật</caption>'+specRows.map(function(x){return "<tr><td colspan=\"2\">"+x+"</td></tr>";}).join("")+rows+'</table></div></div>';
+  var rel=window.PRODUCTS.filter(function(x){return x.category===p.category&&x.id!==p.id;}).slice(0,4);
+  if(rel.length){document.getElementById("related-wrap").style.display="block";document.getElementById("related-grid").innerHTML=rel.map(cardHTML).join("");}
 })();
 document.getElementById("menu-btn").addEventListener("click",function(){document.querySelector("nav.main").classList.toggle("open");});
