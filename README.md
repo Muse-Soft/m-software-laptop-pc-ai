@@ -1,23 +1,22 @@
 # Shop Laptop & PC AI
 
-Trang web bán hàng MVP cho shop Laptop & PC AI: laptop AI, PC, workstation AI
-và phụ kiện, dành cho công việc và chơi game. Trang tĩnh HTML/CSS/JS, không cần
-backend: trang chủ, danh mục (Laptop AI, PC, Workstation, Phụ kiện) và dữ liệu
-sản phẩm mẫu.
+Trang giới thiệu (landing page) **tĩnh** — trang giới thiệu cho Shop Laptop & PC AI. Trang được dựng bằng HTML, CSS và JavaScript thuần, không cần bước biên dịch.
 
-## Demo
+> Mọi tên, số điện thoại, địa chỉ và số liệu trên trang đều là **dữ liệu mẫu**. Giá hiển thị là **giá mẫu**. Biểu mẫu (nếu có) chỉ là giao diện minh họa: không gửi dữ liệu đi đâu và không có backend.
 
-- Link demo: https://m-software-laptop-pc-ai.genalpha.dev
-- Repo: https://github.com/Muse-Soft/m-software-laptop-pc-ai
+**Giấy phép:** [MIT](LICENSE) © M-Software
 
-## Chạy local
+## Cách xem
 
-Mở trực tiếp file `index.html` bằng trình duyệt, hoặc chạy một web server tĩnh
-tại thư mục gốc của repo rồi mở trang chủ.
+Mở `index.html` bằng trình duyệt (nhấp đúp, không cần máy chủ), hoặc mở liên kết demo ở trên. Giữ nguyên các tệp cùng thư mục vì liên kết là tương đối.
 
-## Cấu trúc
+| Tệp | Nội dung |
+|---|---|
+| `README.md` | Tài liệu giới thiệu này |
+| `index.html` | Trang chính |
 
-- `index.html` — trang chủ
-- `danh-muc/` — các trang danh mục
-- `assets/` — CSS/JS và dữ liệu sản phẩm mẫu
-- `docs/` — tài liệu thiết kế và QA
+## English
+
+A **static** landing page for Shop Laptop & PC AI, built with plain HTML, CSS and JavaScript. All names, contact details and figures shown are sample data, displayed prices are sample prices, and any form is interface-only — nothing is submitted and there is no backend. Open `index.html` in a browser. Licensed under MIT.
+
+Contact: contact@genalpha.dev
