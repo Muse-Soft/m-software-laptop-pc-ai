@@ -1,4 +1,4 @@
-/* TEC-31: render thẻ sản phẩm dùng chung + lọc/sắp xếp/phân trang trang danh mục. */
+/* Render thẻ sản phẩm dùng chung + lọc/sắp xếp/phân trang trang danh mục. */
 function fmt(n){return n.toLocaleString("vi-VN")+" ₫";}
 function detailPrefix(){var ph=window.location.pathname;return (ph.indexOf("/danh-muc/")>=0||ph.indexOf("/san-pham/")>=0)?"../":"";}
 function catName(slug){var c=(window.CATEGORIES||[]).filter(function(x){return x.slug===slug;})[0];return c?c.name:slug;}
@@ -104,7 +104,7 @@ function applySearch(list){
   render(true);
 })();
 
-/* Trang chi tiet san pham (TEC-32) */
+/* Trang chi tiet san pham */
 (function(){
   var box=document.getElementById("detail"); if(!box) return;
   var id=parseInt(new URLSearchParams(window.location.search).get("id"),10);
@@ -125,7 +125,7 @@ function applySearch(list){
     +'<div><button class="btn" id="order-btn" '+(p.stock?"":'disabled')+'>'+(p.stock?"Liên hệ đặt hàng":"Hết hàng")+'</button> <a class="btn secondary" href="../danh-muc/'+p.category+'.html">Quay lại danh mục</a></div>'
     +'<p id="order-note" class="order-note" style="display:none"></p>'
     +'<table class="spec-table"><caption>Thông số kỹ thuật</caption>'+specRows.map(function(x){return "<tr><td colspan=\"2\">"+x+"</td></tr>";}).join("")+rows+'</table></div></div>';
-  /* TEC-101: nút "Liên hệ đặt hàng" trước đây là button thuần, không có handler nên bấm không có tác dụng.
+  /* Nút "Liên hệ đặt hàng" trước đây là button thuần, không có handler nên bấm không có tác dụng.
      Hành vi mới: hiện ghi chú ngay tại chỗ + cuộn tới khối liên hệ ở footer và làm nổi bật nó.
      TUYỆT ĐỐI không bịa số điện thoại/email: footer hiện vẫn ghi "(chưa cập nhật)". */
   var orderBtn=document.getElementById("order-btn");
