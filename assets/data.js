@@ -1,4 +1,4 @@
-/* Dữ liệu sản phẩm mẫu — TEC-31. 3 nhóm chính: laptop-ai, pc, workstation + phụ kiện. */
+/* Dữ liệu sản phẩm mẫu. 3 nhóm chính: laptop-ai, pc, workstation + phụ kiện. */
 window.PRODUCTS = [
   // Laptop AI (8)
   {id:1, name:"Laptop AI Pro 14", category:"laptop-ai", brand:"Asus", spec:"Intel Core Ultra 7 · 32GB · 1TB SSD", ram:32, price:27990000, oldPrice:31990000, stock:true, npu:true, isNew:true, featured:true},

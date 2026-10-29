@@ -42,7 +42,7 @@ footer{margin-top:32px;border-top:1px solid var(--color-border);background:var(-
 .loadmore{text-align:center;padding:20px 0}.all-done{text-align:center;color:var(--color-text-muted);padding:12px 0}
 .skeleton{height:200px;background:var(--color-border);border-radius:12px}
 
-/* Trang chi tiet (TEC-32) */
+/* Trang chi tiet */
 .breadcrumb{font-size:14px;color:var(--color-text-muted);padding:16px 0 0}
 .detail-layout{display:grid;gap:24px;padding:24px 0}
 @media(min-width:1024px){.detail-layout{grid-template-columns:1fr 1fr}}
@@ -52,6 +52,6 @@ footer{margin-top:32px;border-top:1px solid var(--color-border);background:var(-
 .spec-table th,.spec-table td{border:1px solid var(--color-border);padding:8px 12px;text-align:left}
 .spec-table th{background:var(--color-bg);width:40%}
 
-/* TEC-101: ghi chú + làm nổi bật khối liên hệ khi bấm "Liên hệ đặt hàng" */
+/* Ghi chú + làm nổi bật khối liên hệ khi bấm "Liên hệ đặt hàng" */
 .order-note{margin-top:10px;color:var(--color-text-muted)}
 .contact-flash{outline:3px solid var(--color-primary);outline-offset:4px}
